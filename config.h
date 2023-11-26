@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 4;       /* vert inner gap between windows */
@@ -20,8 +20,8 @@ static const char col_cyan[]        = "#005577";
 static const char col_maroon[]      = "#5f0000";
 static const char col_gold[]        = "#cea200";
 static const char *colors[][3]      = {
-	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+	/*               fg         bg           border   */
+	[SchemeNorm] = { col_gray3, col_gray1,   col_gray2 },
 	[SchemeSel]  = { col_gray4, col_maroon,  col_gold  },
 };
 
@@ -80,7 +80,11 @@ static const Layout layouts[] = {
 
 /* symbols for media keys - use xev in terminal to extract them */
 /* these were taken from a Fujitsu P728 laptop */
-#define MUTEKEY  0x1008ff12
+#define MUTEKEY       0x1008ff12
+#define VOLUPKEY      0x1008ff13
+#define VOLDOWNKEY    0x1008ff11
+#define BRIGHTUPKEY   0x1008ff02
+#define BRIGHTDOWNKEY 0x1008ff03
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -89,6 +93,14 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 static const char *slockcmd[] = {"slock",NULL};
 static const char *togglemutecmd[] = {"pulsemixer", "--toggle-mute", NULL};
+static const char *volumeupcmd[] = {"pulsemixer", "--change-volume", "+5", NULL};
+static const char *volumedowncmd[] = {"pulsemixer", "--change-volume", "-5", NULL};
+static const char *screenshotcmd[] = {"sc", NULL};
+static const char *brightnessupcmd[] = {"xbacklight", "-inc", "15%", NULL};
+static const char *brightnessdowncmd[] = {"xbacklight", "-dec", "15%", NULL};
+static const char *playpausecmd[] = {"cmus-remote", "--pause", NULL};
+static const char *nextcmd[] = {"cmus-remote", "--next", NULL};
+static const char *prevcmd[] = {"cmus-remote", "--prev", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -119,8 +131,8 @@ static const Key keys[] = {
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_9,      incrovgaps,     {.i = -1 } },
 	{ MODKEY|Mod1Mask,              XK_0,      togglegaps,     {0} },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_Tab,    view,           {0} },
+	//{ MODKEY,                       XK_Tab,    view,           {0} },
+	//{ MODKEY|ShiftMask,             XK_Tab,    view,           {0} },
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
@@ -142,8 +154,17 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ 0,                         MUTEKEY,      spawn,          {.v = togglemutecmd} },
+	{ MODKEY|ShiftMask,             XK_q,       quit,           {0} },
+	{ MODKEY,                       XK_F2,      spawn,          {.v = togglemutecmd} },
+	{ MODKEY,                       XK_F3,      spawn,          {.v = volumedowncmd} },
+	{ MODKEY,                       XK_F4,      spawn,          {.v = volumeupcmd} },
+	{ MODKEY,                       XK_F7,      spawn,          {.v = brightnessdowncmd} },
+	{ MODKEY,                       XK_F8,      spawn,          {.v = brightnessupcmd} },
+	{ MODKEY,                       XK_F11,     spawn,          {.v = screenshotcmd} },
+	{ MODKEY|ShiftMask,             XK_F2,      spawn,          {.v = playpausecmd} },
+	{ MODKEY|ShiftMask,             XK_F3,      spawn,          {.v = prevcmd} },
+	{ MODKEY|ShiftMask,             XK_F4,      spawn,          {.v = nextcmd} },
+
 };
 
 /* button definitions */
