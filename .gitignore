@@ -1,3 +1,5 @@
+.jukit
+.jukit/*
 *.o
 *.rej
 dwm
