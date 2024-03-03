@@ -10,8 +10,9 @@ static const unsigned int gappov    = 10;       /* vert outer gap between window
 static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = {"OCR A:size=10" };
-static const char dmenufont[]       = "OCR A:size=10";
+/* for font: yay ttf-fixedsys-excelsior-linux */
+static const char *fonts[]          = {"Fixedsys Excelsior:size=16" };
+static const char dmenufont[]       = "Fixedsys Excelsior:size=16";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -90,6 +91,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb",
 	col_gray1, "-nf", col_gray3, "-sb", col_gold, "-sf", col_gray1, NULL };
+static const char *addcmd[] = { "dmenu_add", "-m", dmenumon, "-fn", dmenufont, "-nb",
+	col_gray1, "-nf", col_gray3, "-sb", col_gold, "-sf", col_gray1, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *slockcmd[] = {"slock",NULL};
 static const char *togglemutecmd[] = {"pulsemixer", "--toggle-mute", NULL};
@@ -105,6 +108,7 @@ static const char *prevcmd[] = {"cmus-remote", "--prev", NULL};
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_a,      spawn,          {.v = addcmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_BackSpace,spawn,        {.v = slockcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
