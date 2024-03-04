@@ -61,8 +61,8 @@ static const Layout layouts[] = {
 	{ "### nrowgrid",      nrowgrid },
 	{ "--- horizgrid",      horizgrid },
 	{ "::: gaplessgrid",      gaplessgrid },
-	{ "|M| centeredmaster",      centeredmaster },
-	{ ">M> centerfloatingmaster",      centeredfloatingmaster },
+	{ "|M| ctrmaster",      centeredmaster },
+	{ ">M> ctrfltmaster",      centeredfloatingmaster },
 	{ "><> NULL",      NULL },    /* no layout function means floating behavior */
 	{ NULL,       NULL },
 };
@@ -140,7 +140,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[11]} },
+	{ MODKEY,                       XK_n,      setlayout,      {.v = &layouts[12]} },
+	{ MODKEY,                       XK_z,      setlayout,      {.v = &layouts[13]} },
 	/*{ MODKEY,                       XK_space,  setlayout,      {0} },*/
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
