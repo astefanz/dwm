@@ -36,7 +36,8 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "arandr",   NULL,       NULL,       0,            1,           -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       1,           -1 },
 };
 
 /* layout(s) */
@@ -52,8 +53,8 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[]= tile",      tile },    /* first entry is default */
 	{ "[M] monocle",      monocle },
-	{ "[@] spiral",      spiral },
 	{ "[\\] dwindle",     dwindle },
+	{ "[@] spiral",      spiral },
 	{ "H[] deck",      deck },
 	{ "TTT bstack",      bstack },
 	{ "=== bstackhoriz",      bstackhoriz },
@@ -175,6 +176,10 @@ static const Key keys[] = {
 
 /* button definitions */
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
+/* TODO modify first two so that
+ *  - Button1 (left click) ClkLtSymbol goes back to default layout (tile) 
+ *  - Button3 (right click) ClkLtSymbol cycles between all layouts
+ */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
