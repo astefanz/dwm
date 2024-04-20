@@ -105,6 +105,8 @@ static const char *togglemutecmd[] = {"pulsemixer", "--toggle-mute", NULL};
 static const char *volumeupcmd[] = {"pulsemixer", "--change-volume", "+5", NULL};
 static const char *volumedowncmd[] = {"pulsemixer", "--change-volume", "-5", NULL};
 static const char *screenshotcmd[] = {"sc", NULL};
+static const char *printscreencmd[] = {"scfull", NULL};
+static const char *ctlmonitorscmd[] = {"arandr", NULL};
 static const char *brightnessupcmd[] = {"xbacklight", "-inc", "15%", NULL};
 static const char *brightnessdowncmd[] = {"xbacklight", "-dec", "15%", NULL};
 static const char *playpausecmd[] = {"cmus-remote", "--pause", NULL};
@@ -148,6 +150,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[11]} },
 	{ MODKEY,                       XK_n,      setlayout,      {.v = &layouts[12]} },
+	{ MODKEY,                       XK_v,      setlayout,      {.v = &layouts[4]} },
+	{ MODKEY,                       XK_s,      spawn,          {.v = screenshotcmd} },
+	{ MODKEY,                       XK_e,      spawn,          {.v = ctlmonitorscmd} },
 	{ MODKEY,                       XK_z,      setlayout,      {.v = &layouts[13]} },
 	/*{ MODKEY,                       XK_space,  setlayout,      {0} },*/
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
@@ -172,7 +177,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_F4,      spawn,          {.v = volumeupcmd} },
 	{ MODKEY,                       XK_F7,      spawn,          {.v = brightnessdowncmd} },
 	{ MODKEY,                       XK_F8,      spawn,          {.v = brightnessupcmd} },
-	{ MODKEY,                       XK_F11,     spawn,          {.v = screenshotcmd} },
+	{ MODKEY,                       XK_F11,     spawn,          {.v = printscreencmd} },
 	{ MODKEY|ShiftMask,             XK_F2,      spawn,          {.v = playpausecmd} },
 	{ MODKEY|ShiftMask,             XK_F3,      spawn,          {.v = prevcmd} },
 	{ MODKEY|ShiftMask,             XK_F4,      spawn,          {.v = nextcmd} },
